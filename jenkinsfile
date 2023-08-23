@@ -1,0 +1,43 @@
+pipeline {
+    environment {
+        PATH = "/usr/local/bin:$PATH"
+    }
+    
+    agent any
+    
+    tools { nodejs "NodeJS" }
+
+    stages {
+        stage('git clone') {
+            steps {
+             git url: "https://github.com/elad-cloudan/hello.git", branch: "main" 
+            }
+        }
+        
+        stage('build') {
+            steps {
+                script {
+                    sh 'npm install'
+                    sh 'pwd'
+                }
+            }
+        }
+        
+    stage('Build Docker Image') {
+            steps {
+                // Build your Docker image
+                script {
+                    def image = docker.build("doneladio/node-hello-world:${BUILD_NUMBER}")
+                }
+
+                // Push the image to Docker Hub
+                script {
+                    sh 'docker push doneladio/node-hello-world:${BUILD_NUMBER}'
+                    //docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+                      //  def image = docker.image("doneladio/node-hello-world:${BUILD_NUMBER}")
+                        //image.push()
+                }
+             }
+    }
+}
+}
