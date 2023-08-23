@@ -29,3 +29,5 @@ It will perform the following:
 2. Build
 3. Snyk monitor (SCA scan)
 4. Docker build and docker push
+
+Make sure to update ${SNYK_TOKEN} credentials. 
