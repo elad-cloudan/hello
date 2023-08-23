@@ -22,7 +22,7 @@ docker run -it -p 8080:8080 --name node-hello-world node-hello-world:latest
 docker pull doneladio/node-hello-world:latest
 ```
 
-## to run in pipeline
+## To run in Jenkins pipeline
 Simply use jenkinsfile located in the repo 
 It will perform the following: 
 1. Repo clone
